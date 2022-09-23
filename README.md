@@ -11,6 +11,9 @@
   * React 18
   * UI
     * TailwindCSS v3
+    * daisyUI
+        * いつもの手癖で使うかな
+        * TailwindCSSでありがちな記述量増えるのを解消できる
 
   * HTTP Request
     * Axios, Aspida
