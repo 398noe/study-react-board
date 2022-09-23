@@ -29,6 +29,10 @@ module.exports = {
     ".eslintrc.js"
   ],
   rules: {
+    'arrow-body-style': [
+      2,
+      'always'
+    ],
     'no-use-before-define': "off",
     "@typescript-eslint/no-use-before-define": "off",
     'import/prefer-default-export': "off",
@@ -56,6 +60,12 @@ module.exports = {
       },
     ],
     'react/react-in-jsx-scope': 'off',
+    'react/function-component-definition': [
+      2,
+      {
+        'namedComponents': 'arrow-function'
+      }
+    ],
     'no-void': [
       'error',
       {
