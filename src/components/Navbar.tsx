@@ -1,12 +1,10 @@
-export function Navbar() {
+export const Navbar = () => {
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-base-100 shadow-md fixed top-0 z-50">
             <div className="flex-1">
-                <a className="btn btn-ghost normal-case text-xl" href="/">04Board</a>
+                <a className="btn btn-ghost normal-case text-xl" href="/">推しボード</a>
             </div>
-            <div className="flex-none">
-                <div className="btn btn-primary">Button</div>
-            </div>
+            <div className="flex-none" />
         </div>
     );
 }
