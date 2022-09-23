@@ -3,7 +3,9 @@
  */
 export const Threads = () => {
     return (
-        <div></div>
+        <div>
+            <p>This is Threads.</p>
+        </div>
     );
 }
 

@@ -5,7 +5,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Layout from "./components/Layout";
 import Threads from "./pages/Threads";
-import Posts from "./pages/threads/Posts";
+import Posts from "./pages/thread/Posts";
 import Error from "./pages/Error";
 
 const router = createBrowserRouter([

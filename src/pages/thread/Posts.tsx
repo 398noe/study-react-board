@@ -3,7 +3,9 @@
  */
 export const Posts = () => {
     return (
-        <div></div>
+        <div>
+            <p>Posts of thread</p>
+        </div>
     );
 }
 
