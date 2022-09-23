@@ -6,18 +6,20 @@ import reportWebVitals from "./reportWebVitals";
 import Layout from "./components/Layout";
 import Threads from "./pages/Threads";
 import Posts from "./pages/threads/Posts";
+import Error from "./pages/Error";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Layout />,
+        errorElement: <Error />,
         children: [
             {
                 path: "/",
                 element: (<Threads />),
             },
             {
-                path: "threads",
+                path: "thread/:threadId",
                 element: (<Posts />),
             }
         ]
