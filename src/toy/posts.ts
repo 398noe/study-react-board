@@ -1,4 +1,4 @@
-import { postsGetParameters, postsGetResponse200, postsGetResponse400, postsGetResponse500, postsPostParameters, postsPostResponse200, postsPostResponse400, postsPostResponse500 } from "../types/posts"
+import { postsGetParameters, postsGetResponse200, postsGetResponse400, postsGetResponse500, postsPostParameters, postsPostResponse200, postsPostResponse400, postsPostResponse500 } from "../../types/posts";
 
 export const postsGetResponse200Data : postsGetResponse200 = {
     threadId: "10",
