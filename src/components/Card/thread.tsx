@@ -4,8 +4,8 @@ type threadCardProps = thread;
 export const ThreadCard: React.FC<threadCardProps> = (props: threadCardProps) => {
     const { id, title } = props;
     return (
-        <div className="w-full border-b-2 border-indigo-500 shadow-md rounded-xl p-4 hover:border-pink-500">
-            <div className="title">
+        <div className="w-full border-2 border-b-indigo-500 shadow-md rounded-md p-4 hover:border-pink-500">
+            <div className="title text-lg font-bold">
                 <p>{title}</p>
             </div>
         </div>
