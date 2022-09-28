@@ -6,7 +6,7 @@ export const ThreadCard: React.FC<threadCardProps> = (props: threadCardProps) =>
     return (
         <div className="w-full border-b-2 border-indigo-500 shadow-md rounded-xl p-4 hover:border-pink-500">
             <div className="title">
-                <p className="text-md">{title}</p>
+                <p className="text-xl">{title}</p>
             </div>
         </div>
     );
