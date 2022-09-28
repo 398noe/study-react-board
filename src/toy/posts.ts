@@ -13,7 +13,7 @@ export const postsGetResponse200Data : postsGetResponse200 = {
         },
         {
             id: "3",
-            post: "この子。双子Vtuberだけど、かわいい💕 \n https://twitter.com/rina_runarina \n YouTube : https://www.youtube.com/channel/UCCKUwAw-qOGGGbSEKPCrncQ"
+            post: "この子。双子Vtuberだけど、かわいい💕 \n Twitter : https://twitter.com/rina_runarina \n YouTube : https://www.youtube.com/channel/UCCKUwAw-qOGGGbSEKPCrncQ"
         }
     ]
 }
