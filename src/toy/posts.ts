@@ -5,15 +5,15 @@ export const postsGetResponse200Data : postsGetResponse200 = {
     posts: [
         {
             id: "1",
-            post: "テスト投稿"
+            post: "最近は個人勢のVも良いよな👍"
         },
         {
             id: "2",
-            post: "今日はどんな事をするのかな"
+            post: "どんな子よ"
         },
         {
             id: "3",
-            post: "あいうえおかきくけこさしすせそ"
+            post: "この子。双子Vtuberだけど、かわいい💕 \n https://twitter.com/rina_runarina \n YouTube : https://www.youtube.com/channel/UCCKUwAw-qOGGGbSEKPCrncQ"
         }
     ]
 }
