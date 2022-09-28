@@ -4,16 +4,16 @@ export const postsGetResponse200Data : postsGetResponse200 = {
     threadId: "10",
     posts: [
         {
-            id: "10",
-            post: "投稿内容"
+            id: "1",
+            post: "テスト投稿"
         },
         {
-            id: "20",
-            post: "投稿内容その２"
+            id: "2",
+            post: "今日はどんな事をするのかな"
         },
         {
-            id: "30",
-            post: "投稿内容その３"
+            id: "3",
+            post: "あいうえおかきくけこさしすせそ"
         }
     ]
 }
