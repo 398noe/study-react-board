@@ -15,10 +15,22 @@ export const Threads = () => {
                         threads.map((v) => {
                             return (
                                 <ThreadCard key={v.id} id={v.id} title={v.title} />
-                            )
+                            );
                         })
                     }
-
+                </div>
+            </div>
+            <div className="container mx-auto p-4">
+                <div className="form-control">
+                    <div className="flex flex-col gap-8 items-center justify-center">
+                        <div className="btn-group">
+                            <div className="btn">1</div>
+                            <div className="btn btn-disabled">...</div>
+                            <input className="input input-bordered rounded-none w-16" type="text" />
+                            <div className="btn">n+1</div>
+                            <div className="btn">GO</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
