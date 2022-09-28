@@ -7,6 +7,7 @@ import Layout from "./components/Layout";
 import Threads from "./pages/Threads";
 import Posts from "./pages/thread/Posts";
 import Error from "./pages/Error";
+import New from "./pages/New";
 
 const router = createBrowserRouter([
     {
@@ -19,8 +20,12 @@ const router = createBrowserRouter([
                 element: (<Threads />),
             },
             {
-                path: "thread/:threadId",
+                path: "/thread/:threadId",
                 element: (<Posts />),
+            },
+            {
+                path: "/new",
+                element: (<New />),
             }
         ]
     }
