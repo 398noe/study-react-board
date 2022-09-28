@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { FaFireAlt } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
 import { post as postType } from "../../../types/posts";
@@ -5,10 +6,20 @@ import { post as postType } from "../../../types/posts";
 type postCardProps = postType;
 export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
     const { id, post } = props;
+
+    const [emoji, setEmoji] = useState<string[]>();
+    const [showPost, setShowPost] = useState<string[]>();
+
     return (
         <div className="w-full border-4 border-b-indigo-500 shadow-md rounded-xl p-4 hover:border-rose-600">
             <div className="post">
-                <p className="text-lg font-bold inline">{post}</p>
+                {
+                    post.split("\n").map((v) => {
+                        return (
+                            <p className="text-lg font-bold" key={v}>{v}</p>
+                        )
+                    })
+                }
             </div>
             <div className="embed">
                 <p>Iframeコンテンツ</p>
