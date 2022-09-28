@@ -1,10 +1,14 @@
+import { FaFireAlt, FaRegPlusSquare } from "react-icons/fa";
+
 export const Navbar = () => {
     return (
         <div className="navbar bg-base-100 shadow-md fixed top-0 z-50">
             <div className="flex-1">
-                <a className="btn btn-ghost normal-case text-xl" href="/">推しボード</a>
+                <a className="btn btn-ghost normal-case text-xl" href="/"><span className="pr-2">推しボード</span><FaFireAlt /></a>
             </div>
-            <div className="flex-none" />
+            <div className="flex-none">
+                <a className="btn btn-ghost normal-case text-xl" href="/"><span className="pr-2">新規作成</span><FaRegPlusSquare /></a>
+            </div>
         </div>
     );
 }
