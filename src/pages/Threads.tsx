@@ -10,6 +10,7 @@ export const Threads = () => {
     return (
         <div className="py-4">
             <div className="container mx-auto p-4">
+                <p className="p-4 text-3xl font-bold text-center">スレッド一覧</p>
                 <div className="flex flex-col gap-4">
                     {
                         threads.map((v) => {
