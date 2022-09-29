@@ -21,9 +21,6 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
     /**
      * post -> url -> url to tweets and timeline -> url to youtube
      */
-
-
-
     useEffect(() => {
         /**
          * 投稿からURLを取得
@@ -32,9 +29,15 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
             const newUrl = detectURL(text);
             setUrl([...url, ...newUrl]);
         }
+        // URLの配列を取得
+        postToUrl(post);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    useEffect(() => {
         /**
          * TwitterのURLからユーザー情報とアカウント情報を取得
-         * @param text 
          */
         const urlToTwitter = (urls: Array<string>) => {
             urls.forEach((v) => {
@@ -58,13 +61,12 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
                 }
             })
         }
-        // URLの配列を取得
-        postToUrl(post);
         // twitterとyoutubeを取得
-        urlToTwitter(url);
-        urlToYouTube(url);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        const urls = ["https://twitter.com/rina_runarina/status/1536325209627582464", "https://twitter.com/rina_runarina", "https://www.youtube.com/watch?v=0z-RVrK2Rg8"];
+        urlToTwitter(urls);
+        urlToYouTube(urls);
+        // eslint-disable-next-line
+    }, [url]);
     return (
         <div className="w-full border-4 border-b-indigo-500 shadow-md rounded-xl p-4 hover:border-rose-600">
             <div className="post">
@@ -76,7 +78,7 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
                                 {
                                     reactStringReplace(v, urlRegExp, (match) => {
                                         return (
-                                            <a href={match} className="link-primary" key={match}>{match}</a>
+                                            <a href={match} className="link-primary" target="_blank" key={match}>{match}</a>
                                         )
                                     })
                                 }
@@ -87,20 +89,24 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
             </div>
             <div className="embed flex flex-wrap gap-4 justify-center justify-items-center">
                 {
+                    /*
                     tweets.map((v) => {
                         return (
                             <Twitter tweetId={v} key={v} />
                         )
                     })
+                    */
                 }
             </div>
             <div className="embed flex flex-wrap gap-4 justify-center justify-items-center">
                 {
+                    /*
                     youTube.map((v) => {
                         return (
                             <YouTube videoId={v} key={v} />
                         )
                     })
+                    */
                 }
             </div>
             <div className="divider m-0" />
