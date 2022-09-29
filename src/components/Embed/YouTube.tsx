@@ -1,14 +1,12 @@
-import YouTube, { YouTubeProps } from "react-youtube"; // この書き方余計なものまでimportするから重たいんよな…
-
-interface YTEmbedProps extends YouTubeProps {
+interface YouTubeProps {
     videoId: string;
 }
 
-export const YTEmbed = (props: YTEmbedProps): JSX.Element => {
+export const YouTube = (props: YouTubeProps): JSX.Element => {
     const { videoId } = props;
     return (
-        <YouTube videoId={videoId} />
+        <iframe className="w-full max-w-md aspect-video" title="YouTube Embed" src={`https://www.youtube-nocookie.com/embed/${videoId}`} />
     );
 }
 
-export default YTEmbed;
+export default YouTube;
