@@ -5,7 +5,7 @@ export const postsGetResponse200Data : postsGetResponse200 = {
     posts: [
         {
             id: "1",
-            post: "最近は個人勢のVも良いよな👍"
+            post: "最近は個人勢のVも良いよな👍 \n https://twitter.com/rina_runarina/status/1536325209627582464"
         },
         {
             id: "2",
@@ -13,7 +13,7 @@ export const postsGetResponse200Data : postsGetResponse200 = {
         },
         {
             id: "3",
-            post: "この子。双子Vtuberだけど、かわいい💕 \n Twitter : https://twitter.com/rina_runarina \n YouTube : https://www.youtube.com/channel/UCCKUwAw-qOGGGbSEKPCrncQ"
+            post: "双子Vtuberだけど、かわいい💕オリジナル曲も良いぞぉ😎 \n https://www.youtube.com/watch?v=0z-RVrK2Rg8"
         }
     ]
 }
