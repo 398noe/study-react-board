@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { FaFireAlt } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
 import { post as postType } from "../../../types/posts";
-import Twitter from "../Embed/twitter";
+import Twitter from "../Embed/Twitter"; // default宣言しているのでTwitterでも通るけど、宣言先のTWEmbedにするべきかどうか
+import YouTube from "../Embed/YouTube";
 
 type postCardProps = postType;
 export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
@@ -10,7 +11,7 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
 
     const [emoji, setEmoji] = useState<string[]>();
     const [tweets, setTweets] = useState<string[]>(["1536325209627582464","1300805849607073797"]);
-    const [youTube, setYouTube] = useState<string[]>();
+    const [youTube, setYouTube] = useState<string[]>(["2SciSwfRz2E"]);
     const [showPost, setShowPost] = useState<string[]>();
 
     return (
@@ -29,6 +30,13 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
                     tweets.map((v) => {
                         return (
                             <Twitter tweetId={v}/>
+                        )
+                    })
+                }
+                {
+                    youTube.map((v) => {
+                        return (
+                            <YouTube videoId={v} />
                         )
                     })
                 }
