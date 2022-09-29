@@ -10,6 +10,7 @@
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
     "react-twitter-embed": "^4.0.4",
+    "react-youtube": "^10.0.0",
     "typescript": "*",
     "web-vitals": "^2.1.4"
   },
