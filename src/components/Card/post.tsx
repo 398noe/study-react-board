@@ -78,7 +78,7 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
                                 {
                                     reactStringReplace(v, urlRegExp, (match) => {
                                         return (
-                                            <a href={match} className="link-primary" target="_blank" key={match}>{match}</a>
+                                            <a href={match} className="link-primary" target="_blank" rel="noreferrer" key={match}>{match}</a>
                                         )
                                     })
                                 }
