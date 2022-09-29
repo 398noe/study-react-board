@@ -7,6 +7,7 @@ import { detectTweet, detectURL, detectYouTube, urlRegExp } from "../../utils/ur
 import Twitter from "../Embed/Twitter"; // default宣言しているのでTwitterでも通るけど、宣言先のTWEmbedにするべきかどうか
 import YouTube from "../Embed/YouTube";
 import { urlType } from "../../../types/url";
+import { removeDuplicateArray } from "../../utils/array";
 
 type postCardProps = postType;
 export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
@@ -43,10 +44,14 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
             urls.forEach((v) => {
                 const newTweet: urlType = detectTweet(v);
                 if (newTweet.type === "tweetId") {
-                    setTweets([...tweets, newTweet.url]);
+                    setTweets((prev) => {
+                        return [...prev, newTweet.url]
+                    });
                 }
                 if (newTweet.type === "userId") {
-                    setTimeline([...timeline, newTweet.url]);
+                    setTimeline((prev) => {
+                        return [...prev, newTweet.url]
+                    });
                 }
             });
         }
@@ -57,16 +62,32 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
             urls.forEach((v) => {
                 const newYouTube: urlType = detectYouTube(v);
                 if (newYouTube.type === "videoId") {
-                    setYouTube([...youTube, newYouTube.url]);
+                    setYouTube((prev) => {
+                        return [...prev, newYouTube.url];
+                    })
                 }
             })
         }
         // twitterとyoutubeを取得
-        const urls = ["https://twitter.com/rina_runarina/status/1536325209627582464", "https://twitter.com/rina_runarina", "https://www.youtube.com/watch?v=0z-RVrK2Rg8"];
-        urlToTwitter(urls);
-        urlToYouTube(urls);
+        // const urls = ["https://twitter.com/rina_runarina/status/1536325209627582464", "https://twitter.com/rina_runarina", "https://www.youtube.com/watch?v=0z-RVrK2Rg8"];
+        urlToTwitter(url);
+        urlToYouTube(url);
         // eslint-disable-next-line
     }, [url]);
+
+    /**
+     * 重複要素を削除する
+     */
+    useEffect(() => {
+        removeDuplicateArray(tweets);
+    }, [tweets]);
+    useEffect(() => {
+        removeDuplicateArray(timeline);
+    }, [timeline]);
+    useEffect(() => {
+        removeDuplicateArray(youTube);
+    }, [youTube]);
+
     return (
         <div className="w-full border-4 border-b-indigo-500 shadow-md rounded-xl p-4 hover:border-rose-600">
             <div className="post">
@@ -89,24 +110,20 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
             </div>
             <div className="embed flex flex-wrap gap-4 justify-center justify-items-center">
                 {
-                    /*
                     tweets.map((v) => {
                         return (
                             <Twitter tweetId={v} key={v} />
                         )
                     })
-                    */
                 }
             </div>
             <div className="embed flex flex-wrap gap-4 justify-center justify-items-center">
                 {
-                    /*
                     youTube.map((v) => {
                         return (
                             <YouTube videoId={v} key={v} />
                         )
                     })
-                    */
                 }
             </div>
             <div className="divider m-0" />
