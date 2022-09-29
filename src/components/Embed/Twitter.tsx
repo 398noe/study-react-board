@@ -4,7 +4,7 @@ interface TwitterProps {
     tweetId: string;
 }
 
-export const Twitter: React.FC<TwitterProps> = (props: TwitterProps) => {
+export const TWEmbed: React.FC<TwitterProps> = (props: TwitterProps) => {
     const { tweetId } = props;
     return (
         <div className="w-full max-w-xs">
@@ -15,4 +15,4 @@ export const Twitter: React.FC<TwitterProps> = (props: TwitterProps) => {
     );
 }
 
-export default Twitter;
+export default TWEmbed;
