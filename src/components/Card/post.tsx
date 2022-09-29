@@ -3,18 +3,20 @@ import reactStringReplace from "react-string-replace";
 import { FaFireAlt } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
 import { post as postType } from "../../../types/posts";
+import { urlType } from "../../../types/url";
+import { emojiMeter } from "../../../types/emoji";
+import { removeDuplicateArray } from "../../utils/array";
 import { detectTweet, detectURL, detectYouTube, urlRegExp } from "../../utils/url";
+import { detectEmoji, emojiToMeter } from "../../utils/emoji";
 import Twitter from "../Embed/Twitter"; // default宣言しているのでTwitterでも通るけど、宣言先のTWEmbedにするべきかどうか
 import YouTube from "../Embed/YouTube";
-import { urlType } from "../../../types/url";
-import { removeDuplicateArray } from "../../utils/array";
 
 type postCardProps = postType;
 export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
     const { post } = props;
 
     const [url, setUrl] = useState<string[]>([]);
-    const [emoji, setEmoji] = useState<string[]>([]);
+    const [emoji, setEmoji] = useState<emojiMeter>({});
     const [tweets, setTweets] = useState<string[]>([]);
     const [timeline, setTimeline] = useState<string[]>([]);
     const [youTube, setYouTube] = useState<string[]>([]);
@@ -30,8 +32,17 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
             const newUrl = detectURL(text);
             setUrl([...url, ...newUrl]);
         }
+        // 絵文字の出現と個数を取得
+        const postToEmoji = (text: string) => {
+            const newEmoji = detectEmoji(text);
+            const newEmojiMeter = emojiToMeter(newEmoji);
+            setEmoji(newEmojiMeter);
+        }
+
         // URLの配列を取得
         postToUrl(post);
+        // 絵文字出現のリストを取得
+        postToEmoji(post);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -77,6 +88,7 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
 
     /**
      * 重複要素を削除する
+     * @todo もっとうまい書き方があれば教えてください(´；ω；｀)
      */
     useEffect(() => {
         removeDuplicateArray(tweets);
@@ -132,10 +144,18 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
                     <p className="font-bold">熱量メーター</p>
                     <span><FaFireAlt className="text-rose-600" /></span>
                 </div>
-                <div className="badge badge-outline badge-lg">
-                    <span>💕</span>
-                    <span><FiPlus /></span>
-                    <span>30</span>
+                <div className="flex flex-wrap gap-2">
+                    {
+                        Object.keys(emoji).map((key) => {
+                            return (
+                                <div className="badge badge-outline badge-lg" key={key}>
+                                    <span>{key}</span>
+                                    <span><FiPlus /></span>
+                                    <span>{emoji[key]}</span>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
             </div>
         </div>
