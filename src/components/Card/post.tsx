@@ -3,19 +3,68 @@ import reactStringReplace from "react-string-replace";
 import { FaFireAlt } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
 import { post as postType } from "../../../types/posts";
-import { urlRegExp } from "../../utils/url";
+import { detectTweet, detectURL, detectYouTube, urlRegExp } from "../../utils/url";
 import Twitter from "../Embed/Twitter"; // default宣言しているのでTwitterでも通るけど、宣言先のTWEmbedにするべきかどうか
 import YouTube from "../Embed/YouTube";
+import { urlType } from "../../../types/url";
 
 type postCardProps = postType;
 export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
-    const { id, post } = props;
+    const { post } = props;
 
-    const [emoji, setEmoji] = useState<string[]>();
-    const [tweets, setTweets] = useState<string[]>(["1536325209627582464", "1300805849607073797"]);
-    const [youTube, setYouTube] = useState<string[]>(["2SciSwfRz2E","zjcuy37uoRM"]);
-    const [showPost, setShowPost] = useState<string[]>();
+    const [url, setUrl] = useState<string[]>([]);
+    const [emoji, setEmoji] = useState<string[]>([]);
+    const [tweets, setTweets] = useState<string[]>([]);
+    const [timeline, setTimeline] = useState<string[]>([]);
+    const [youTube, setYouTube] = useState<string[]>([]);
 
+    /**
+     * post -> url -> url to tweets and timeline -> url to youtube
+     */
+
+
+
+    useEffect(() => {
+        /**
+         * 投稿からURLを取得
+         */
+        const postToUrl = (text: string) => {
+            const newUrl = detectURL(text);
+            setUrl([...url, ...newUrl]);
+        }
+        /**
+         * TwitterのURLからユーザー情報とアカウント情報を取得
+         * @param text 
+         */
+        const urlToTwitter = (urls: Array<string>) => {
+            urls.forEach((v) => {
+                const newTweet: urlType = detectTweet(v);
+                if (newTweet.type === "tweetId") {
+                    setTweets([...tweets, newTweet.url]);
+                }
+                if (newTweet.type === "userId") {
+                    setTimeline([...timeline, newTweet.url]);
+                }
+            });
+        }
+        /**
+         * YouTubeのURLからビデオ情報を取得
+         */
+        const urlToYouTube = (urls: Array<string>) => {
+            urls.forEach((v) => {
+                const newYouTube: urlType = detectYouTube(v);
+                if (newYouTube.type === "videoId") {
+                    setYouTube([...youTube, newYouTube.url]);
+                }
+            })
+        }
+        // URLの配列を取得
+        postToUrl(post);
+        // twitterとyoutubeを取得
+        urlToTwitter(url);
+        urlToYouTube(url);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     return (
         <div className="w-full border-4 border-b-indigo-500 shadow-md rounded-xl p-4 hover:border-rose-600">
             <div className="post">
@@ -25,9 +74,9 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
                         return (
                             <p className="text-lg font-bold break-all" key={v}>
                                 {
-                                    reactStringReplace(v, urlRegExp, (match, i) => {
+                                    reactStringReplace(v, urlRegExp, (match) => {
                                         return (
-                                            <a href={match} className="link-primary">{match}</a>
+                                            <a href={match} className="link-primary" key={match}>{match}</a>
                                         )
                                     })
                                 }
@@ -40,7 +89,7 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
                 {
                     tweets.map((v) => {
                         return (
-                            <Twitter tweetId={v} />
+                            <Twitter tweetId={v} key={v} />
                         )
                     })
                 }
@@ -49,7 +98,7 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
                 {
                     youTube.map((v) => {
                         return (
-                            <YouTube videoId={v} />
+                            <YouTube videoId={v} key={v} />
                         )
                     })
                 }
