@@ -14,6 +14,10 @@ export const postsGetResponse200Data : postsGetResponse200 = {
         {
             id: "3",
             post: "双子Vtuberだけど、かわいい💕オリジナル曲も良いぞぉ \n https://www.youtube.com/watch?v=0z-RVrK2Rg8 \n https://www.youtube.com/watch?v=2SciSwfRz2E"
+        },
+        {
+            id: "4",
+            post: "これは良いぞ👍👍👍💪 \n 今日からこの子の推しになります💕💕💕💕★♬✨😘😎"
         }
     ]
 }
