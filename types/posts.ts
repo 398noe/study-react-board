@@ -28,6 +28,7 @@ export type postsGetResponse200 = {
 }
 
 export type postsGetResponse400 = response400;
+export type postsGetResponse404 = response400;
 export type postsGetResponse500 = response500;
 
 export type postsPostParametersBody = {
