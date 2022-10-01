@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { postsGetResponse200 } from "../../../types/posts";
 import { PostCard } from "../../components/Card/post";
 import { postsGetResponse200Data } from "../../toy/posts";
+
 /**
  * 掲示板スレッド内を表示するアプリ
  */
