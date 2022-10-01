@@ -7,12 +7,14 @@ export type thread = {
     title: string
 }
 
+export type threadsGetParametersQuery = {
+    offset: string
+}
+
 export interface threadsGetParameters extends parameters {
     path: {
     },
-    query: {
-        offset: string
-    },
+    query: threadsGetParametersQuery,
     body: {
     }
 }

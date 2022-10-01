@@ -7,13 +7,17 @@ export type post = {
     post: string
 }
 
+export type postsGetParametersQuery = {
+    offset: string;
+}
+
+export type postsGetParametersPath = {
+    threadId: string;
+}
+
 export interface postsGetParameters extends parameters {
-    path: {
-        threadId: string,
-    },
-    query: {
-        offset: string,
-    },
+    path: postsGetParametersPath,
+    query: postsGetParametersQuery
     body: {
     }
 }
@@ -26,15 +30,17 @@ export type postsGetResponse200 = {
 export type postsGetResponse400 = response400;
 export type postsGetResponse500 = response500;
 
+export type postsPostParametersBody = {
+    post: string;
+}
+
 export interface postsPostParameters extends parameters {
     path: {
         threadId: string,
     },
     query: {
     },
-    body: {
-        post: string
-    }
+    body: postsPostParametersBody
 }
 
 export type postsPostResponse200 = {
