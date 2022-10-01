@@ -1,20 +1,31 @@
 import { emojiMeter } from "../../types/emoji";
-// eslint-disable-next-line
-export const emojiRegExp = new RegExp(/\p{Emoji_Presentation}/gu);
+import { emojiRegExp } from "./regExp";
 
-export const detectEmoji = (str: string) => {
+/**
+ * Get emoji from text
+ * @param str text
+ * @returns emoji array
+ */
+export const detectEmoji = (str: string): Array<string> => {
     const result = str.match(emojiRegExp);
     if (result === null) {
         return [];
     }
+
     return result?.flat();
 }
 
+/**
+ * Convert emoji array to emoji objects
+ * @param arr emoji array
+ * @returns emojiMeter
+ */
 export const emojiToMeter = (arr: Array<string>): emojiMeter => {
     const reshape: emojiMeter = {};
     for (let i = 0; i < arr.length; i += 1) {
         const element = arr[i];
         reshape[element] = reshape[element] ? reshape[element] + 1 : 1;
     }
+
     return reshape;
 }

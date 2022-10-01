@@ -1,12 +1,10 @@
+/**
+ * @file url.ts
+ * @author 398noe
+ * @description detection tools of urls
+ */
 import { urlType } from "../../types/url";
-// eslint-disable-next-line
-export const urlRegExp = new RegExp(/(https?:\/\/[\S]+)/igm);
-
-// eslint-disable-next-line
-export const twitterRegExp = new RegExp(/(https?:\/\/twitter.com\/)([A-Za-z0-9_]+)(\/(status|statuses)\/(\d+))?/igm);
-
-// eslint-disable-next-line
-export const youtubeRegExp = new RegExp(/(https?:\/\/(www\.)?youtube.com\/watch\?v=([^&]+))/igm);
+import { urlRegExp, twitterRegExp, youtubeRegExp } from "./regExp";
 
 /**
  * Make URL Array from string
@@ -22,15 +20,13 @@ export const detectURL = (str: string): Array<string> => {
 };
 
 /**
- * Detect Tweet ID and User ID
+ * Get tweets from string
  * @param str 
- * @returns 
+ * @returns
+ * @example https://twitter.com/rina_runarina -> ["", "https://twitter.com/", "rina_runarina", undefined, undefined, undefined, ""]
+ * @example https://twitter.com/rina_runarina/status/1536325209627582464 -> ["", "https://twitter.com/", "rina_runarina", "/status/1536325209627582464", "status", "1536325209627582464", ""]
  */
 export const detectTweet = (str: string): urlType => {
-    // https://twitter.com/rina_runarina
-    // -> ["", "https://twitter.com/", "rina_runarina", undefined, undefined, undefined, ""]
-    // https://twitter.com/rina_runarina/status/1536325209627582464
-    // -> ["", "https://twitter.com/", "rina_runarina", "/status/1536325209627582464", "status", "1536325209627582464", ""]
     const result = str.split(twitterRegExp);
     if (result == null) {
         return {
@@ -39,19 +35,21 @@ export const detectTweet = (str: string): urlType => {
         };
     }
 
-    // ユーザーリンクの場合result[4]はundefinedになる
+    // ユーザーリンクの場合result[5]はundefinedになる
     if (result[2] !== undefined && result[5] !== undefined) {
         return {
             url: result[5],
             type: "tweetId"
         };
     }
+
     if (result[2] !== undefined) {
         return {
             url: result[2],
             type: "userId"
         };
     }
+
     return {
         url: "",
         type: "none"
@@ -59,13 +57,13 @@ export const detectTweet = (str: string): urlType => {
 }
 
 /**
- * Detect YouTube Video Id
+ * Get video id from youtube urls
+ * @param str youtube url
+ * @returns @type urlType
+ * @example https://www.youtube.com/watch?v=zjcuy37uoRM -> ["", "https://www.youtube.com/watch?v=zjcuy37uoRM", "www.", "zjcuy37uoRM", ""]
  */
 export const detectYouTube = (str: string): urlType => {
-    // https://www.youtube.com/watch?v=zjcuy37uoRM
-    // -> ["", "https://www.youtube.com/watch?v=zjcuy37uoRM", "www.", "zjcuy37uoRM", ""]
-    const result = str.split(youtubeRegExp);
-    
+    const result = str.split(youtubeRegExp);    
     if (result === null) {
         return {
             url: "",
