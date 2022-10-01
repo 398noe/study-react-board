@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import ThreadCard from "../components/Card/thread";
-import { threadsGetResponse200Data } from "../toy/threads";
-import { threadsGetParameters, threadsGetResponse200 } from "../../types/threads";
-import { apiClient } from "../utils/apiClient";
 import { getThreads } from "../actions/threads/getThreads";
+import ThreadCard from "../components/Card/thread";
+
+import { threadsGetParameters, threadsGetResponse200 } from "../../types/threads";
+import { threadsGetResponse200Data } from "../toy/threads";
+
 /**
- * スレッドの一覧を表示するページ
+ * Threads page
  */
 export const Threads = () => {
     const [threads, setThreads] = useState<threadsGetResponse200>(threadsGetResponse200Data);
