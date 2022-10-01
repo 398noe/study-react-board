@@ -1,12 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ThreadCard from "../components/Card/thread";
 import { threadsGetResponse200Data } from "../toy/threads";
 import { threadsGetResponse200 } from "../../types/threads";
+import { apiClient } from "../utils/apiClient";
 /**
  * スレッドの一覧を表示するページ
  */
 export const Threads = () => {
     const [threads, setThreads] = useState<threadsGetResponse200>(threadsGetResponse200Data);
+
+    // Get threads data from backend api
+    useEffect(() => {
+        const exec = async () => {
+            const threadsGetResponse = await apiClient.threads.$get({
+                query: {
+                    offset: "1"
+                }
+            }).catch((err) => {
+                
+            });
+            console.log(threadsGetResponse200Data);
+            
+            setThreads(threadsGetResponse200Data);
+        };
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        exec();
+    }, []);
     return (
         <div className="py-4">
             <div className="container mx-auto p-4">
