@@ -6,7 +6,8 @@ import { post as postType } from "../../../types/posts";
 import { urlType } from "../../../types/url";
 import { emojiMeter } from "../../../types/emoji";
 import { removeDuplicateArray } from "../../utils/array";
-import { detectTweet, detectURL, detectYouTube, urlRegExp } from "../../utils/url";
+import { detectTweet, detectURL, detectYouTube } from "../../utils/url";
+import { urlRegExp } from "../../utils/regExp";
 import { detectEmoji, emojiToMeter } from "../../utils/emoji";
 import Twitter from "../Embed/Twitter"; // default宣言しているのでTwitterでも通るけど、宣言先のTWEmbedにするべきかどうか
 import YouTube from "../Embed/YouTube";
