@@ -3,7 +3,7 @@ import ThreadCard from "../components/Card/thread";
 import { threadsGetResponse200Data } from "../toy/threads";
 import { threadsGetParameters, threadsGetResponse200 } from "../../types/threads";
 import { apiClient } from "../utils/apiClient";
-import { getThreads } from "../usecases/threads/getThreads";
+import { getThreads } from "../actions/threads/getThreads";
 /**
  * スレッドの一覧を表示するページ
  */
