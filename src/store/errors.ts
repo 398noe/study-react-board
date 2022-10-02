@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { responseError } from "../types/util";
+import { RootState } from "./store";
 
 const initialState: responseError = {
     ErrorCode: null,
@@ -18,5 +19,14 @@ const slice = createSlice({
 });
 
 export const { setErrors } = slice.actions;
+
+/**
+ * ここでstoreの中の値をexportすることを忘れずに
+ * @param state 
+ * @returns 
+ */
+export const errors = (state: RootState) => {
+    return state.errors;
+}
 
 export default slice.reducer;
