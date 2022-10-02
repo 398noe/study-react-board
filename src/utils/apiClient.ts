@@ -13,7 +13,7 @@ export const apiClient = api(aspida(axios, {
 /**
  * Errorhandling
  */
-axios.interceptors.request.use(response => {
+axios.interceptors.response.use(response => {
     return response;
 }, error => {
     if (error instanceof AxiosError) {
