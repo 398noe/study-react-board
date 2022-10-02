@@ -14,6 +14,9 @@ const slice = createSlice({
     reducers: {
         setErrors: (state, action: PayloadAction<responseError>) => {
             return action.payload;
+        },
+        resetErrors: (state) => {
+            return initialState
         }
     }
 });
