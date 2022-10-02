@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { errors } from "../store/errors";
 import { useSelector } from "../store/store";
@@ -5,6 +6,10 @@ import { useSelector } from "../store/store";
 export const Error = () => {
     // Error Messageを表示
     const errorsMessage = useSelector(errors);
+
+    useEffect(() => {
+        console.log(errorsMessage);
+    },[errorsMessage]);
 
     return (
         <div className="container mx-auto p-4">
