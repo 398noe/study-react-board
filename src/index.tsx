@@ -8,6 +8,8 @@ import Threads from "./pages/Threads";
 import Posts from "./pages/thread/Posts";
 import Error from "./pages/Error";
 import New from "./pages/New";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 const router = createBrowserRouter([
     {
@@ -34,7 +36,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
     <React.StrictMode>
-        <RouterProvider router={router}/>
+        <Provider store={store}>
+            <RouterProvider router={router} />
+        </Provider>
     </React.StrictMode>
 );
 
