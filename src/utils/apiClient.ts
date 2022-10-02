@@ -18,7 +18,6 @@ axios.interceptors.response.use(response => {
 }, error => {
     if (error instanceof AxiosError) {
         if (error.response) {
-            console.error(error.response.data);
             switch (error.response.status) {
                 case 400:
                     // Validation Error
