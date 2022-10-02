@@ -1,9 +1,10 @@
-import AxiosError from "@aspida/axios";
+// import AxiosError from "@aspida/axios";
+import { AxiosError } from "axios";
 import { threadsGetParameters } from "../../../types/threads";
 import { apiClient } from "../../utils/apiClient";
 
 export const getThreads = async (parameters: threadsGetParameters) => {
-    const { path, body, query } = parameters;
+    const { query } = parameters;
     try {
         const threadsGetResponse = await apiClient.threads.get({
             query
