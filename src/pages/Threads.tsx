@@ -47,7 +47,7 @@ export const Threads = () => {
                 /**
                  * @todo Axios関連のエラーは既に共通エラーハンドリングされている
                  */
-                console.log(error);
+                console.error(error);
                 throw error;
             }
         };
