@@ -14,6 +14,9 @@ export const store = configureStore({
     },
 });
 
+/**
+ * DispatchやState, selectorを使うのに型を拡張する
+ */
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export const useSelector: TypedUseSelectorHook<RootState> = rawUseSelector;
