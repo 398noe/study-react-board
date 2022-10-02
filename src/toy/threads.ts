@@ -1,4 +1,4 @@
-import { threadsGetResponse200, threadsGetResponse400, threadsGetResponse500, threadsPostParameters, threadsPostResponse200, threadsPostResponse400, threadsPostResponse500 } from "../../types/threads";
+import { threadsGetResponse200, threadsGetResponse400, threadsGetResponse500, threadsPostParameters, threadsPostResponse200, threadsPostResponse400, threadsPostResponse500 } from "../types/threads";
 
 export const threadsGetResponse200Data : threadsGetResponse200 = [
     {

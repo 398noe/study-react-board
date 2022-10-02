@@ -1,6 +1,6 @@
 // import AxiosError from "@aspida/axios";
 import { AxiosError } from "axios";
-import { threadsGetParameters } from "../../../types/threads";
+import { threadsGetParameters } from "../../types/threads";
 import { apiClient } from "../../utils/apiClient";
 
 export const getThreads = async (parameters: threadsGetParameters) => {

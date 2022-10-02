@@ -1,5 +1,5 @@
 import { DefineMethods } from "aspida";
-import { threadsGetParametersQuery, threadsGetResponse200, threadsPostParametersBody, threadsPostResponse200 } from "../../../types/threads"
+import { threadsGetParametersQuery, threadsGetResponse200, threadsPostParametersBody, threadsPostResponse200 } from "../../types/threads"
 
 export type Methods = DefineMethods<{
     get: {

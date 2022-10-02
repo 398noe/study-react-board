@@ -7,9 +7,9 @@ import { FiPlus } from "react-icons/fi";
 import Twitter from "../Embed/Twitter";
 import YouTube from "../Embed/YouTube";
 
-import { post as postType } from "../../../types/posts";
-import { urlType } from "../../../types/url";
-import { emojiMeter } from "../../../types/emoji";
+import { post as postType } from "../../types/posts";
+import { urlType } from "../../types/url";
+import { emojiMeter } from "../../types/emoji";
 
 import { removeDuplicateArray } from "../../utils/array";
 import { detectTweet, detectURL, detectYouTube } from "../../utils/url";

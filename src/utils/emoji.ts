@@ -1,4 +1,4 @@
-import { emojiMeter } from "../../types/emoji";
+import { emojiMeter } from "../types/emoji";
 import { emojiRegExp } from "./regExp";
 
 /**

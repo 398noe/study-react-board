@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getThreads } from "../actions/threads/getThreads";
 import ThreadCard from "../components/Card/thread";
 
-import { threadsGetParameters, threadsGetResponse200 } from "../../types/threads";
+import { threadsGetParameters, threadsGetResponse200 } from "../types/threads";
 // import { threadsGetResponse200Data } from "../toy/threads";
 
 /**

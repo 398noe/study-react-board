@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { thread } from "../../../types/threads";
+import { thread } from "../../types/threads";
 
 type threadCardProps = thread;
 export const ThreadCard: React.FC<threadCardProps> = (props: threadCardProps) => {

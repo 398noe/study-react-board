@@ -3,7 +3,7 @@
  * @author 398noe
  * @description detection tools of urls
  */
-import { urlType } from "../../types/url";
+import { urlType } from "../types/url";
 import { urlRegExp, twitterRegExp, youtubeRegExp } from "./regExp";
 
 /**
