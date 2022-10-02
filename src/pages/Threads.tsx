@@ -3,13 +3,14 @@ import { getThreads } from "../actions/threads/getThreads";
 import ThreadCard from "../components/Card/thread";
 
 import { threadsGetParameters, threadsGetResponse200 } from "../../types/threads";
-import { threadsGetResponse200Data } from "../toy/threads";
+// import { threadsGetResponse200Data } from "../toy/threads";
 
 /**
  * Threads page
  */
 export const Threads = () => {
-    const [threads, setThreads] = useState<threadsGetResponse200>(threadsGetResponse200Data);
+    const [threads, setThreads] = useState<threadsGetResponse200>([]);
+    const [offset, setOffset] = useState<number>(0);
 
     const [getParameters, setGetParameters] = useState<threadsGetParameters>({
         path: {},
@@ -18,14 +19,28 @@ export const Threads = () => {
         },
         body: {}
     });
+
+    const getTrueOffset = (v: number) => {
+        return (v * 10).toString();
+    }
+
+    // setTrueOffset from offset to setGetParameters
+    useEffect(() => {
+        const trueOffset = getTrueOffset(offset);
+        setGetParameters({...getParameters, query: {
+            offset: trueOffset
+        }});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [offset]);
+
     // Get threads data from backend api
     useEffect(() => {
         const exec = async () => {
             try {
                 const threadsGetResponse = await getThreads(getParameters);
-                console.log(threadsGetResponse);    
+                setThreads(threadsGetResponse);
             } catch (error) {
-                console.error(error);
+                console.log("Error!");
                 throw error;
             }
         };
@@ -33,6 +48,7 @@ export const Threads = () => {
         exec();
         // eslint-disable-next-line
     }, []);
+
     return (
         <div className="py-4">
             <div className="container mx-auto p-4">
