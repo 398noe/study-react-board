@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { getThreads } from "../actions/threads/getThreads";
 import ThreadCard from "../components/Card/thread";
-
+import { errors } from "../store/errors";
+import { useSelector } from "../store/store";
+import { getThreads } from "../actions/threads/getThreads";
 import { threadsGetParameters, threadsGetResponse200 } from "../types/threads";
 // import { threadsGetResponse200Data } from "../toy/threads";
 
@@ -15,7 +16,7 @@ export const Threads = () => {
     const [getParameters, setGetParameters] = useState<threadsGetParameters>({
         path: {},
         query: {
-            offset: "-1"
+            offset: "1"
         },
         body: {}
     });
@@ -27,10 +28,12 @@ export const Threads = () => {
     // setTrueOffset from offset to setGetParameters
     useEffect(() => {
         const trueOffset = getTrueOffset(offset);
-        setGetParameters({...getParameters, query: {
-            offset: trueOffset
-        }});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        setGetParameters({
+            ...getParameters, query: {
+                offset: trueOffset
+            }
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [offset]);
 
     // Get threads data from backend api
@@ -38,9 +41,13 @@ export const Threads = () => {
         const exec = async () => {
             try {
                 const threadsGetResponse = await getThreads(getParameters);
+                console.log(threadsGetResponse);
                 setThreads(threadsGetResponse);
             } catch (error) {
-                console.log("Error!");
+                /**
+                 * @todo Axios関連のエラーは既に共通エラーハンドリングされている
+                 */
+                console.log(error);
                 throw error;
             }
         };
