@@ -1,12 +1,58 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ThreadCard from "../components/Card/thread";
-import { threadsGetResponse200Data } from "../toy/threads";
-import { threadsGetResponse200 } from "../../types/threads";
+import { getThreads } from "../actions/threads/getThreads";
+import { threadsGetParameters, threadsGetResponse200 } from "../types/threads";
+
 /**
- * スレッドの一覧を表示するページ
+ * Threads page
  */
 export const Threads = () => {
-    const [threads, setThreads] = useState<threadsGetResponse200>(threadsGetResponse200Data);
+    const [threads, setThreads] = useState<threadsGetResponse200>([]);
+    const [offset, setOffset] = useState<number>(0);
+
+    const [getParameters, setGetParameters] = useState<threadsGetParameters>({
+        path: {},
+        query: {
+            offset: "1"
+        },
+        body: {}
+    });
+
+    const getTrueOffset = (v: number) => {
+        return (v * 10).toString();
+    }
+
+    // setTrueOffset from offset to setGetParameters
+    useEffect(() => {
+        const trueOffset = getTrueOffset(offset);
+        setGetParameters({
+            ...getParameters, query: {
+                offset: trueOffset
+            }
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [offset]);
+
+    // Get threads data from backend api
+    useEffect(() => {
+        const exec = async () => {
+            try {
+                const threadsGetResponse = await getThreads(getParameters);
+                console.log(threadsGetResponse);
+                setThreads(threadsGetResponse);
+            } catch (error) {
+                /**
+                 * @todo Axios関連のエラーは既に共通エラーハンドリングされている
+                 */
+                console.error(error);
+                throw error;
+            }
+        };
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        exec();
+        // eslint-disable-next-line
+    }, []);
+
     return (
         <div className="py-4">
             <div className="container mx-auto p-4">

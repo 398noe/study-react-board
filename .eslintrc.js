@@ -33,6 +33,7 @@ module.exports = {
       2,
       'always'
     ],
+    'no-console': "off",
     'no-use-before-define': "off",
     "@typescript-eslint/no-use-before-define": "off",
     'import/prefer-default-export': "off",

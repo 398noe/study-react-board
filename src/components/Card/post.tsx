@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 import reactStringReplace from "react-string-replace";
+
 import { FaFireAlt } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
-import { post as postType } from "../../../types/posts";
-import { urlType } from "../../../types/url";
-import { emojiMeter } from "../../../types/emoji";
-import { removeDuplicateArray } from "../../utils/array";
-import { detectTweet, detectURL, detectYouTube, urlRegExp } from "../../utils/url";
-import { detectEmoji, emojiToMeter } from "../../utils/emoji";
-import Twitter from "../Embed/Twitter"; // default宣言しているのでTwitterでも通るけど、宣言先のTWEmbedにするべきかどうか
+
+import Twitter from "../Embed/Twitter";
 import YouTube from "../Embed/YouTube";
+
+import { post as postType } from "../../types/posts";
+import { urlType } from "../../types/url";
+import { emojiMeter } from "../../types/emoji";
+
+import { removeDuplicateArray } from "../../utils/array";
+import { detectTweet, detectURL, detectYouTube } from "../../utils/url";
+import { urlRegExp } from "../../utils/regExp";
+import { detectEmoji, emojiToMeter } from "../../utils/emoji";
+
 
 type postCardProps = postType;
 export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
@@ -26,22 +32,23 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
      */
     useEffect(() => {
         /**
-         * 投稿からURLを取得
+         * Get urls from posted text
          */
         const postToUrl = (text: string) => {
             const newUrl = detectURL(text);
             setUrl([...url, ...newUrl]);
         }
-        // 絵文字の出現と個数を取得
+        // Get number of emoji
         const postToEmoji = (text: string) => {
             const newEmoji = detectEmoji(text);
             const newEmojiMeter = emojiToMeter(newEmoji);
             setEmoji(newEmojiMeter);
         }
 
-        // URLの配列を取得
+        // Get urls array
         postToUrl(post);
-        // 絵文字出現のリストを取得
+
+        // Get emoji list
         postToEmoji(post);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,7 +56,7 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
 
     useEffect(() => {
         /**
-         * TwitterのURLからユーザー情報とアカウント情報を取得
+         * Get user account and tweet id from urls array
          */
         const urlToTwitter = (urls: Array<string>) => {
             urls.forEach((v) => {
@@ -67,7 +74,7 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
             });
         }
         /**
-         * YouTubeのURLからビデオ情報を取得
+         * Get video id from youtube url
          */
         const urlToYouTube = (urls: Array<string>) => {
             urls.forEach((v) => {
@@ -79,15 +86,16 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
                 }
             })
         }
-        // twitterとyoutubeを取得
-        // const urls = ["https://twitter.com/rina_runarina/status/1536325209627582464", "https://twitter.com/rina_runarina", "https://www.youtube.com/watch?v=0z-RVrK2Rg8"];
+
+        // get embed information of twitter and youtube
         urlToTwitter(url);
         urlToYouTube(url);
+
         // eslint-disable-next-line
     }, [url]);
 
     /**
-     * 重複要素を削除する
+     * Delete duplicate contents in array
      * @todo もっとうまい書き方があれば教えてください(´；ω；｀)
      */
     useEffect(() => {
@@ -105,7 +113,7 @@ export const PostCard: React.FC<postCardProps> = (props: postCardProps) => {
             <div className="post">
                 {
                     post.split("\n").map((v) => {
-                        // 更にURLが検出されたらアンカーリンクにする
+                        // Make anchor link if urls are detected.
                         return (
                             <p className="text-lg font-bold break-all" key={v}>
                                 {
