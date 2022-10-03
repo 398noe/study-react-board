@@ -1,3 +1,3 @@
 export const getTrueOffset = (v: number) => {
-    return (v).toString();
+    return ((v - 1) * 10).toString();
 }
