@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { postsGetParameters, postsGetResponse200 } from "../../types/posts";
+import { postsGetParameters, postsGetResponse200, postsPostParameters } from "../../types/posts";
 import { PostCard } from "../../components/Card/post";
 import { getPosts } from "../../actions/posts/getPosts";
 import { useSelector } from "../../store/store";
 import { errors } from "../../store/errors";
 import { postsGetResponse200Data } from "../../toy/posts";
 import { getTrueOffset } from "../../utils/offset";
+import { postPosts } from "../../actions/posts/postPosts";
 
 /**
  * 掲示板スレッド内を表示するアプリ
@@ -33,18 +34,64 @@ export const Posts = () => {
         body: {}
     });
 
+    const [postParameters, setPostParameters] = useState<postsPostParameters>({
+        path: {
+            threadId: threadId ?? "0"
+        },
+        query: {
+        },
+        body: {
+            post: ""
+        }
+    });
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setNewPost(e.target.value);
     }
 
+    useEffect(() => {
+        setPostParameters({
+            ...postParameters, body: {
+                post: newPost
+            }
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [newPost]);
+
+    const createNewPost = async () => {
+        // postする
+        try {
+            const postsPostReponse = await postPosts(postParameters);
+            console.log(postsPostReponse);
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+        // 再度スレッドを取得し直す
+        // ここのロジックは再度利用しているので、共通化しておきたい
+        try {
+            const postsGetResponse = await getPosts(getParameters);
+            console.log(postsGetResponse);
+            setPosts(postsGetResponse);
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+        // newpostをリセット
+        setNewPost("");
+    }
+
+    /**
+     * 本来はreduxのreducersで管理したいところ
+     * postsのoffsetとthreadsのoffsetを混ぜてはいけないと思ったので、あえてreduxのstoreを使わないでおきました
+     */
     const handlePrevious = () => {
         setOffset((prev) => {
             const newOffset = offset - 1;
             if (newOffset < 1) {
                 return 1;
             }
-            return newOffset
+            return newOffset;
         });
     }
 
@@ -106,7 +153,13 @@ export const Posts = () => {
                                         )
                                     }
                                     <div className="btn">Page {offset}</div>
-                                    <div className="btn" onClick={handleNext} onKeyDown={handleNext}>»</div>
+                                    {
+                                        posts && posts.posts.length < 10 ? (
+                                            <div className="btn btn-disabled" onClick={handleNext} onKeyDown={handleNext}>»</div>
+                                        ) : (
+                                            <div className="btn" onClick={handleNext} onKeyDown={handleNext}>»</div>
+                                        )
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -116,14 +169,13 @@ export const Posts = () => {
                     {
                         errorsMessage.ErrorCode ?
                             (
-                                // eslint-disable-next-line react/jsx-no-useless-fragment
                                 <></>
                             )
                             : (
                                 <div className="flex flex-col gap-4 w-full md:w-1/3">
                                     <p className="p-4 text-2xl font-bold">投稿する</p>
                                     <textarea className="textarea textarea-bordered w-full h-48" placeholder="Write comment" value={newPost} onChange={handleChange} />
-                                    <div className="btn">投稿！</div>
+                                    <div className="btn" onClick={() => {createNewPost()}} onKeyDown={() => {createNewPost()}}>投稿！</div>
                                 </div>
                             )
                     }

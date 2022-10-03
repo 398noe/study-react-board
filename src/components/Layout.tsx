@@ -17,7 +17,6 @@ export const Layout = () => {
                     errorsMessage.ErrorCode ? (
                         <Error />
                     ) : (
-                        // eslint-disable-next-line react/jsx-no-useless-fragment
                         <></>
                     )
                 }
