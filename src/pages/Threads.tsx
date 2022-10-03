@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import ThreadCard from "../components/Card/thread";
-import { errors } from "../store/errors";
-import { useSelector } from "../store/store";
 import { getThreads } from "../actions/threads/getThreads";
 import { threadsGetParameters, threadsGetResponse200 } from "../types/threads";
-// import { threadsGetResponse200Data } from "../toy/threads";
 
 /**
  * Threads page
