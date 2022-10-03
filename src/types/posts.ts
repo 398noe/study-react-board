@@ -24,6 +24,7 @@ export interface postsGetParameters extends parameters {
 
 export type postsGetResponse200 = {
     threadId: string,
+    title: string,
     posts: posts
 }
 
