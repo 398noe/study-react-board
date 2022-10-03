@@ -25,7 +25,7 @@ export const Threads = () => {
             if (newOffset < 1) {
                 return 1;
             }
-            return newOffset
+            return newOffset;
         });
     }
 
