@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { postThreads } from "../actions/threads/postThreads";
 import { threadsPostParameters } from "../types/threads";
 
 export const New = () => {
     const [threadName, setThreadName] = useState<string>("");
+
+    // for redirect
+    const navigate = useNavigate();
 
     const [postParameters, setPostParameters] = useState<threadsPostParameters>({
         path: {},
@@ -30,7 +34,9 @@ export const New = () => {
     const createNewThread = async () => {
         try {
             const threadsPostResponse = await postThreads(postParameters);
-            console.log(threadsPostResponse);                
+            console.log(threadsPostResponse);
+            // 正常に発行されたら、threadIdに移動
+            navigate(`/thread/${threadsPostResponse.threadId}`)
         } catch (error) {
             console.error(error);
             throw error;
