@@ -1,26 +1,41 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ThreadCard from "../components/Card/thread";
 import { getThreads } from "../actions/threads/getThreads";
 import { threadsGetParameters, threadsGetResponse200 } from "../types/threads";
+import { getTrueOffset } from "../utils/offset";
 
 /**
  * Threads page
  */
 export const Threads = () => {
     const [threads, setThreads] = useState<threadsGetResponse200>([]);
-    const [offset, setOffset] = useState<number>(0);
+    const [offset, setOffset] = useState<number>(1);
 
     const [getParameters, setGetParameters] = useState<threadsGetParameters>({
         path: {},
         query: {
-            offset: "1"
+            offset: "0"
         },
         body: {}
     });
 
-    const getTrueOffset = (v: number) => {
-        return (v * 10).toString();
+    const handlePrevious = () => {
+        setOffset((prev) => {
+            const newOffset = offset - 1;
+            if (newOffset < 1) {
+                return 1;
+            }
+            return newOffset
+        });
     }
+
+    const handleNext = () => {
+        setOffset((prev) => {
+            const newOffset = offset + 1;
+            return newOffset;
+        })
+    }
+
 
     // setTrueOffset from offset to setGetParameters
     useEffect(() => {
@@ -48,10 +63,9 @@ export const Threads = () => {
                 throw error;
             }
         };
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         exec();
         // eslint-disable-next-line
-    }, []);
+    }, [getParameters]);
 
     return (
         <div className="py-4">
@@ -68,15 +82,17 @@ export const Threads = () => {
                 </div>
             </div>
             <div className="container mx-auto p-4">
-                <div className="form-control">
-                    <div className="flex flex-col gap-8 items-center justify-center">
-                        <div className="btn-group">
-                            <div className="btn">1</div>
-                            <div className="btn btn-disabled">...</div>
-                            <input className="input input-bordered rounded-none w-16" type="text" />
-                            <div className="btn">n+1</div>
-                            <div className="btn">GO</div>
-                        </div>
+                <div className="flex flex-col gap-8 items-center justify-center">
+                    <div className="btn-group">
+                        {
+                            offset <= 1 ? (
+                                <div className="btn btn-disabled" onClick={handlePrevious} onKeyDown={handlePrevious}>«</div>
+                            ) : (
+                                <div className="btn" onClick={handlePrevious} onKeyDown={handlePrevious}>«</div>
+                            )
+                        }
+                        <div className="btn">Page {offset}</div>
+                        <div className="btn" onClick={handleNext} onKeyDown={handleNext}>»</div>
                     </div>
                 </div>
             </div>

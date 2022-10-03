@@ -5,6 +5,8 @@ import { PostCard } from "../../components/Card/post";
 import { getPosts } from "../../actions/posts/getPosts";
 import { useSelector } from "../../store/store";
 import { errors } from "../../store/errors";
+import { postsGetResponse200Data } from "../../toy/posts";
+import { getTrueOffset } from "../../utils/offset";
 
 /**
  * 掲示板スレッド内を表示するアプリ
@@ -13,6 +15,7 @@ export const Posts = () => {
     const errorsMessage = useSelector(errors);
     // 投稿記事
     const [posts, setPosts] = useState<postsGetResponse200>();
+    const [offset, setOffset] = useState<number>(1);
 
     // 新規投稿する文章
     const [newPost, setNewPost] = useState<string>("");
@@ -25,15 +28,43 @@ export const Posts = () => {
             threadId: threadId ?? "0"
         },
         query: {
-            offset: "1"
+            offset: "0"
         },
         body: {}
-    })
+    });
 
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setNewPost(e.target.value);
     }
+
+    const handlePrevious = () => {
+        setOffset((prev) => {
+            const newOffset = offset - 1;
+            if (newOffset < 1) {
+                return 1;
+            }
+            return newOffset
+        });
+    }
+
+    const handleNext = () => {
+        setOffset((prev) => {
+            const newOffset = offset + 1;
+            return newOffset;
+        })
+    }
+
+    // setTrueOffset from offset to setGetParameters
+    useEffect(() => {
+        const trueOffset = getTrueOffset(offset);
+        setGetParameters({
+            ...getParameters, query: {
+                offset: trueOffset
+            }
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [offset]);
 
     useEffect(() => {
         const exec = async () => {
@@ -49,7 +80,7 @@ export const Posts = () => {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         exec();
         // eslint-disable-next-line
-    }, []);
+    }, [getParameters]);
 
     return (
         <div className="py-4">
@@ -65,18 +96,21 @@ export const Posts = () => {
                             })
                         }
                         <div className="container mx-auto p-4">
-                            <div className="form-control">
-                                <div className="flex flex-col gap-8 items-center justify-center">
-                                    <div className="btn-group">
-                                        <div className="btn">1</div>
-                                        <div className="btn btn-disabled">...</div>
-                                        <input className="input input-bordered rounded-none w-16" type="text" />
-                                        <div className="btn">n+1</div>
-                                        <div className="btn">GO</div>
-                                    </div>
+                            <div className="flex flex-col gap-8 items-center justify-center">
+                                <div className="btn-group">
+                                    {
+                                        offset <= 1 ? (
+                                            <div className="btn btn-disabled" onClick={handlePrevious} onKeyDown={handlePrevious}>«</div>
+                                        ) : (
+                                            <div className="btn" onClick={handlePrevious} onKeyDown={handlePrevious}>«</div>
+                                        )
+                                    }
+                                    <div className="btn">Page {offset}</div>
+                                    <div className="btn" onClick={handleNext} onKeyDown={handleNext}>»</div>
                                 </div>
                             </div>
                         </div>
+
 
                     </div>
                     {
