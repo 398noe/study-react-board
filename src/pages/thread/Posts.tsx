@@ -5,7 +5,6 @@ import { PostCard } from "../../components/Card/post";
 import { getPosts } from "../../actions/posts/getPosts";
 import { useSelector } from "../../store/store";
 import { errors } from "../../store/errors";
-import { postsGetResponse200Data } from "../../toy/posts";
 import { getTrueOffset } from "../../utils/offset";
 import { postPosts } from "../../actions/posts/postPosts";
 
@@ -87,7 +86,7 @@ export const Posts = () => {
      */
     const handlePrevious = () => {
         setOffset((prev) => {
-            const newOffset = offset - 1;
+            const newOffset = prev - 1;
             if (newOffset < 1) {
                 return 1;
             }
@@ -97,7 +96,7 @@ export const Posts = () => {
 
     const handleNext = () => {
         setOffset((prev) => {
-            const newOffset = offset + 1;
+            const newOffset = prev + 1;
             return newOffset;
         })
     }
