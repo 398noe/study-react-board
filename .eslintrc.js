@@ -4,39 +4,40 @@ module.exports = {
     es2021: true
   },
   extends: [
-    'plugin:react/recommended',
-    'airbnb',
-    'airbnb/hooks',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'prettier',
+    "plugin:react/recommended",
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier",
   ],
   overrides: [
 
   ],
-  parser: '@typescript-eslint/parser',
+  parser: "@typescript-eslint/parser",
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
+    ecmaVersion: "latest",
+    sourceType: "module",
     tsconfigRootDir: __dirname,
-    project: ['./tsconfig.json'],
+    project: ["./tsconfig.json"],
   },
   plugins: [
-    'react',
-    '@typescript-eslint',
+    "react",
+    "@typescript-eslint",
   ],
   "ignorePatterns": [
     ".eslintrc.js"
   ],
   rules: {
-    'arrow-body-style': [
+    "arrow-body-style": [
       2,
-      'always'
+      "always"
     ],
-    'no-console': "off",
-    'no-use-before-define': "off",
+    "no-console": "off",
+    "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": "off",
-    'import/prefer-default-export': "off",
+    "@typescript-eslint/no-floating-promises": "off",
+    "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": [
       "error",
       {
@@ -45,44 +46,46 @@ module.exports = {
         ]
       }
     ],
-    'import/extensions': [
-      'error',
+    "import/extensions": [
+      "error",
       {
-        js: 'never',
-        jsx: 'never',
-        ts: 'never',
-        tsx: 'never',
+        js: "never",
+        jsx: "never",
+        ts: "never",
+        tsx: "never",
       },
     ],
-    'react/jsx-filename-extension': [
-      'error',
+    "jsx-a11y/no-static-element-interactions": "off",
+    "react/jsx-filename-extension": [
+      "error",
       {
-        extensions: ['.jsx', '.tsx'],
+        extensions: [".jsx", ".tsx"],
       },
     ],
-    'react/react-in-jsx-scope': 'off',
-    'react/function-component-definition': [
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-no-useless-fragment": "off",
+    "react/function-component-definition": [
       2,
       {
-        'namedComponents': 'arrow-function'
+        "namedComponents": "arrow-function"
       }
     ],
-    'no-void': [
-      'error',
+    "no-void": [
+      "error",
       {
         allowAsStatement: true,
       },
     ],
   },
   settings: {
-    'import/resolver': {
+    "import/resolver": {
       node: {
-        paths: ['src'],
-        extensions: ['.js', '.jsx', '.ts', '.tsx']
+        paths: ["src"],
+        extensions: [".js", ".jsx", ".ts", ".tsx"]
       },
     },
-    'react': {
-      'version': 'detect'
+    "react": {
+      "version": "detect"
     },
   },
 }
