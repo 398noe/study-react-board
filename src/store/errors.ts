@@ -21,7 +21,7 @@ const slice = createSlice({
     }
 });
 
-export const { setErrors } = slice.actions;
+export const { setErrors, resetErrors } = slice.actions;
 
 /**
  * ここでstoreの中の値をexportすることを忘れずに
