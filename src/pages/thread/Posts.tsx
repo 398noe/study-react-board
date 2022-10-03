@@ -38,6 +38,10 @@ export const Posts = () => {
         setNewPost(e.target.value);
     }
 
+    /**
+     * 本来はreduxのreducersで管理したいところ
+     * postsのoffsetとthreadsのoffsetを混ぜてはいけないと思ったので、あえてreduxのstoreを使わないでおきました
+     */
     const handlePrevious = () => {
         setOffset((prev) => {
             const newOffset = offset - 1;
@@ -106,7 +110,13 @@ export const Posts = () => {
                                         )
                                     }
                                     <div className="btn">Page {offset}</div>
-                                    <div className="btn" onClick={handleNext} onKeyDown={handleNext}>»</div>
+                                    {
+                                        posts && posts.posts.length < 10 ? (
+                                            <div className="btn btn-disabled" onClick={handleNext} onKeyDown={handleNext}>»</div>
+                                        ) : (
+                                            <div className="btn" onClick={handleNext} onKeyDown={handleNext}>»</div>
+                                        )
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -116,7 +126,6 @@ export const Posts = () => {
                     {
                         errorsMessage.ErrorCode ?
                             (
-                                // eslint-disable-next-line react/jsx-no-useless-fragment
                                 <></>
                             )
                             : (
