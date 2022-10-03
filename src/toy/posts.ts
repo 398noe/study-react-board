@@ -2,6 +2,7 @@ import { postsGetParameters, postsGetResponse200, postsGetResponse400, postsGetR
 
 export const postsGetResponse200Data : postsGetResponse200 = {
     threadId: "10",
+    title: "Vtuberについて語るスレッド",
     posts: [
         {
             id: "1",
