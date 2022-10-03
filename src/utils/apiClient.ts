@@ -6,8 +6,7 @@ import { setErrors } from "../store/errors";
 import { response400Data, response404Data, response500Data } from "./errorRespnose";
 
 export const apiClient = api(aspida(axios, {
-    baseURL: process.env.REACT_APP_BASE_URL,
-    timeout: 10000
+    baseURL: process.env.REACT_APP_BASE_URL
 }));
 
 /**
