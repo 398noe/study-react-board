@@ -1,25 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "./index.css";
+import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 import Layout from "./components/Layout";
 import Threads from "./pages/Threads";
 import Posts from "./pages/thread/Posts";
 import Error from "./pages/Error";
 import New from "./pages/New";
-import { Provider } from "react-redux";
+import { resetErrors } from "./store/errors";
 import { store } from "./store/store";
+import "./index.css";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Layout />,
         errorElement: <Error />,
+        action: () => {
+            store.dispatch(resetErrors())
+        },
         children: [
             {
                 path: "/",
                 element: (<Threads />),
+
             },
             {
                 path: "/thread/:threadId",
