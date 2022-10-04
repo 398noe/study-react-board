@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import ThreadCard from "../components/Card/thread";
+import { useEffect, useState } from "react";
+import ThreadCard from "../components/Card/Thread";
 import { getThreads } from "../actions/threads/getThreads";
 import { threadsGetParameters, threadsGetResponse200 } from "../types/threads";
 import { getTrueOffset } from "../utils/offset";
@@ -14,36 +14,36 @@ export const Threads = () => {
     const [getParameters, setGetParameters] = useState<threadsGetParameters>({
         path: {},
         query: {
-            offset: "0"
+            offset: "0",
         },
-        body: {}
+        body: {},
     });
 
     const handlePrevious = () => {
         setOffset((prev) => {
-            const newOffset = offset - 1;
+            const newOffset = prev - 1;
             if (newOffset < 1) {
                 return 1;
             }
             return newOffset;
         });
-    }
+    };
 
     const handleNext = () => {
         setOffset((prev) => {
-            const newOffset = offset + 1;
+            const newOffset = prev + 1;
             return newOffset;
-        })
-    }
-
+        });
+    };
 
     // setTrueOffset from offset to setGetParameters
     useEffect(() => {
         const trueOffset = getTrueOffset(offset);
         setGetParameters({
-            ...getParameters, query: {
-                offset: trueOffset
-            }
+            ...getParameters,
+            query: {
+                offset: trueOffset,
+            },
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [offset]);
@@ -72,32 +72,32 @@ export const Threads = () => {
             <div className="container mx-auto p-4">
                 <p className="p-4 text-3xl font-bold text-center">スレッド一覧</p>
                 <div className="flex flex-col gap-4">
-                    {
-                        threads.map((v) => {
-                            return (
-                                <ThreadCard key={v.id} id={v.id} title={v.title} />
-                            );
-                        })
-                    }
+                    {threads.map((v) => {
+                        return <ThreadCard key={v.id} id={v.id} title={v.title} />;
+                    })}
                 </div>
             </div>
             <div className="container mx-auto p-4">
                 <div className="flex flex-col gap-8 items-center justify-center">
                     <div className="btn-group">
-                        {
-                            offset <= 1 ? (
-                                <div className="btn btn-disabled" onClick={handlePrevious} onKeyDown={handlePrevious}>«</div>
-                            ) : (
-                                <div className="btn" onClick={handlePrevious} onKeyDown={handlePrevious}>«</div>
-                            )
-                        }
+                        {offset <= 1 ? (
+                            <div className="btn btn-disabled" onClick={handlePrevious} onKeyDown={handlePrevious}>
+                                «
+                            </div>
+                        ) : (
+                            <div className="btn" onClick={handlePrevious} onKeyDown={handlePrevious}>
+                                «
+                            </div>
+                        )}
                         <div className="btn">Page {offset}</div>
-                        <div className="btn" onClick={handleNext} onKeyDown={handleNext}>»</div>
+                        <div className="btn" onClick={handleNext} onKeyDown={handleNext}>
+                            »
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default Threads;

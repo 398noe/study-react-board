@@ -9,7 +9,7 @@ export const Error = () => {
 
     useEffect(() => {
         console.log(errorsMessage);
-    },[errorsMessage]);
+    }, [errorsMessage]);
 
     return (
         <div className="container mx-auto p-4">
@@ -23,6 +23,6 @@ export const Error = () => {
             </div>
         </div>
     );
-}
+};
 
 export default Error;

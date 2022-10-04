@@ -1,65 +1,72 @@
-import { postsGetParameters, postsGetResponse200, postsGetResponse400, postsGetResponse500, postsPostResponse200, postsPostResponse400, postsPostResponse500 } from "../types/posts";
+import {
+    postsGetParameters,
+    postsGetResponse200,
+    postsGetResponse400,
+    postsGetResponse500,
+    postsPostResponse200,
+    postsPostResponse400,
+    postsPostResponse500,
+} from "../types/posts";
 
-export const postsGetResponse200Data : postsGetResponse200 = {
+export const postsGetResponse200Data: postsGetResponse200 = {
     threadId: "10",
     title: "Vtuberについて語るスレッド",
     posts: [
         {
             id: "1",
-            post: "最近は個人勢のVも良いよな👍 \n https://twitter.com/rina_runarina/status/1536325209627582464 \n https://twitter.com/runa_runarina/status/1300805849607073797"
+            post: "最近は個人勢のVも良いよな👍 \n https://twitter.com/rina_runarina/status/1536325209627582464 \n https://twitter.com/runa_runarina/status/1300805849607073797",
         },
         {
             id: "2",
-            post: "どんな子よ"
+            post: "どんな子よ",
         },
         {
             id: "3",
-            post: "双子Vtuberだけど、かわいい💕オリジナル曲も良いぞぉ \n https://www.youtube.com/watch?v=0z-RVrK2Rg8 \n https://www.youtube.com/watch?v=2SciSwfRz2E"
+            post: "双子Vtuberだけど、かわいい💕オリジナル曲も良いぞぉ \n https://www.youtube.com/watch?v=0z-RVrK2Rg8 \n https://www.youtube.com/watch?v=2SciSwfRz2E",
         },
         {
             id: "4",
-            post: "これは良いぞ👍👍👍💪 \n 今日からこの子の推しになります💕💕💕💕★♬✨😘😎"
-        }
-    ]
-}
+            post: "これは良いぞ👍👍👍💪 \n 今日からこの子の推しになります💕💕💕💕★♬✨😘😎",
+        },
+    ],
+};
 
-export const postsGetParametersData : postsGetParameters = {
+export const postsGetParametersData: postsGetParameters = {
     path: {
-        threadId: "10"
+        threadId: "10",
     },
     query: {
-        offset: "10"
+        offset: "10",
     },
-    body: {
-    }
-}
+    body: {},
+};
 
-export const postsGet400ResponseData : postsGetResponse400 = {
+export const postsGet400ResponseData: postsGetResponse400 = {
     ErrorCode: 400,
     ErrorMessageJP: "バリデーションエラー",
-    ErrorMessageEN: "validation error"
-}
+    ErrorMessageEN: "validation error",
+};
 
-export const postsGet500ResponseData : postsGetResponse500 = {
+export const postsGet500ResponseData: postsGetResponse500 = {
     ErrorCode: 500,
     ErrorMessageJP: "サーバでエラーが発生しました。",
-    ErrorMessageEN: "Error occured at server."
-}
+    ErrorMessageEN: "Error occured at server.",
+};
 
-export const postsPostResponse200Data : postsPostResponse200 = {
+export const postsPostResponse200Data: postsPostResponse200 = {
     postId: "10",
     threadId: "10",
-    post: "投稿内容"
-}
+    post: "投稿内容",
+};
 
-export const postsPost400ResponseData : postsPostResponse400 = {
+export const postsPost400ResponseData: postsPostResponse400 = {
     ErrorCode: 400,
     ErrorMessageJP: "バリデーションエラー",
-    ErrorMessageEN: "validation error"
-}
+    ErrorMessageEN: "validation error",
+};
 
-export const postsPost500ResponseData : postsPostResponse500 = {
+export const postsPost500ResponseData: postsPostResponse500 = {
     ErrorCode: 500,
     ErrorMessageJP: "サーバでエラーが発生しました。",
-    ErrorMessageEN: "Error occured at server."
-}
+    ErrorMessageEN: "Error occured at server.",
+};

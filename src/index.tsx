@@ -18,24 +18,23 @@ const router = createBrowserRouter([
         element: <Layout />,
         errorElement: <Error />,
         action: () => {
-            store.dispatch(resetErrors())
+            store.dispatch(resetErrors());
         },
         children: [
             {
                 path: "/",
-                element: (<Threads />),
-
+                element: <Threads />,
             },
             {
                 path: "/thread/:threadId",
-                element: (<Posts />),
+                element: <Posts />,
             },
             {
                 path: "/new",
-                element: (<New />),
-            }
-        ]
-    }
+                element: <New />,
+            },
+        ],
+    },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);

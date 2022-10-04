@@ -9,8 +9,8 @@ const slice = createSlice({
     reducers: {
         setThreads: (state, action: PayloadAction<threads>) => {
             return action.payload;
-        }
-    }
+        },
+    },
 });
 
 export default slice.reducer;

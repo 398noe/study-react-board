@@ -4,4 +4,4 @@ public/
 *.config.js
 .*lintrc.js
 /*.*
-src/api/$api.ts
+src/api/
