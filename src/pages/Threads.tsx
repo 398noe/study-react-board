@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ThreadCard from "../components/Card/thread";
+import ThreadCard from "../components/Card/Thread";
 import { getThreads } from "../actions/threads/getThreads";
 import { threadsGetParameters, threadsGetResponse200 } from "../types/threads";
 import { getTrueOffset } from "../utils/offset";

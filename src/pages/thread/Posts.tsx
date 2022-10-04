@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { postsGetParameters, postsGetResponse200, postsPostParameters } from "../../types/posts";
-import { PostCard } from "../../components/Card/post";
+import { PostCard } from "../../components/Card/Post";
 import { getPosts } from "../../actions/posts/getPosts";
 import { useSelector } from "../../store/store";
 import { errors } from "../../store/errors";
