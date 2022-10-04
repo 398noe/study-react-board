@@ -13,6 +13,6 @@ export const ThreadCard: React.FC<threadCardProps> = (props: threadCardProps) =>
             </div>
         </Link>
     );
-}
+};
 
 export default ThreadCard;

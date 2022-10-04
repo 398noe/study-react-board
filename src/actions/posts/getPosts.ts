@@ -7,8 +7,8 @@ export const getPosts = async (parameters: postsGetParameters) => {
     try {
         // eslint-disable-next-line no-underscore-dangle
         const threadsGetResponse = await apiClient.threads._threadId(path.threadId).posts.get({
-            query
-        })
+            query,
+        });
         return threadsGetResponse.body;
     } catch (error) {
         if (error instanceof AxiosError) {
@@ -19,4 +19,4 @@ export const getPosts = async (parameters: postsGetParameters) => {
         }
         throw error;
     }
-}
+};

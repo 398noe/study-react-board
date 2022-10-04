@@ -6,7 +6,7 @@ export const postThreads = async (parameters: threadsPostParameters) => {
     const { body } = parameters;
     try {
         const threadsPostResponse = await apiClient.threads.post({
-            body
+            body,
         });
         return threadsPostResponse.body;
     } catch (error) {
@@ -18,4 +18,4 @@ export const postThreads = async (parameters: threadsPostParameters) => {
         }
         throw error;
     }
-}
+};

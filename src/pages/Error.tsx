@@ -5,11 +5,13 @@ export const Error = () => {
                 <div className="max-w-md">
                     <h1 className="text-5xl font-bold">Error!</h1>
                     <p className="py-6">なにかエラーが起きたみたいです…(´；ω；｀)</p>
-                    <a className="btn btn-primary" href="/">トップに戻る</a>
+                    <a className="btn btn-primary" href="/">
+                        トップに戻る
+                    </a>
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default Error;

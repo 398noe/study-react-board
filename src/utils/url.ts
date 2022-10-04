@@ -8,8 +8,8 @@ import { urlRegExp, twitterRegExp, youtubeRegExp } from "./regExp";
 
 /**
  * Make URL Array from string
- * @param str 
- * @returns 
+ * @param str
+ * @returns
  */
 export const detectURL = (str: string): Array<string> => {
     const result = str.match(urlRegExp);
@@ -21,7 +21,7 @@ export const detectURL = (str: string): Array<string> => {
 
 /**
  * Get tweets from string
- * @param str 
+ * @param str
  * @returns
  * @example https://twitter.com/rina_runarina -> ["", "https://twitter.com/", "rina_runarina", undefined, undefined, undefined, ""]
  * @example https://twitter.com/rina_runarina/status/1536325209627582464 -> ["", "https://twitter.com/", "rina_runarina", "/status/1536325209627582464", "status", "1536325209627582464", ""]
@@ -31,7 +31,7 @@ export const detectTweet = (str: string): urlType => {
     if (result == null) {
         return {
             url: "",
-            type: "none"
+            type: "none",
         };
     }
 
@@ -39,22 +39,22 @@ export const detectTweet = (str: string): urlType => {
     if (result[2] !== undefined && result[5] !== undefined) {
         return {
             url: result[5],
-            type: "tweetId"
+            type: "tweetId",
         };
     }
 
     if (result[2] !== undefined) {
         return {
             url: result[2],
-            type: "userId"
+            type: "userId",
         };
     }
 
     return {
         url: "",
-        type: "none"
+        type: "none",
     };
-}
+};
 
 /**
  * Get video id from youtube urls
@@ -63,24 +63,24 @@ export const detectTweet = (str: string): urlType => {
  * @example https://www.youtube.com/watch?v=zjcuy37uoRM -> ["", "https://www.youtube.com/watch?v=zjcuy37uoRM", "www.", "zjcuy37uoRM", ""]
  */
 export const detectYouTube = (str: string): urlType => {
-    const result = str.split(youtubeRegExp);    
+    const result = str.split(youtubeRegExp);
     if (result === null) {
         return {
             url: "",
-            type: "none"
+            type: "none",
         };
     }
-    
+
     // array[3]がVideoIdになっている
     if (result[3] !== undefined) {
         return {
             url: result[3],
-            type: "videoId"
-        }
+            type: "videoId",
+        };
     }
 
     return {
         url: "",
-        type: "none"
-    }
-}
+        type: "none",
+    };
+};

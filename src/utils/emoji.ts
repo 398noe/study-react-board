@@ -1,10 +1,15 @@
+/**
+ * @file emoji.ts
+ * @author 398noe
+ * @description Utils for emoji
+ */
 import { emojiMeter } from "../types/emoji";
 import { emojiRegExp } from "./regExp";
 
 /**
- * Get emoji from text
- * @param str text
- * @returns emoji array
+ * Get emoji Array from text
+ * @param  {string} str text
+ * @returns Array
  */
 export const detectEmoji = (str: string): Array<string> => {
     const result = str.match(emojiRegExp);
@@ -13,12 +18,12 @@ export const detectEmoji = (str: string): Array<string> => {
     }
 
     return result?.flat();
-}
+};
 
 /**
- * Convert emoji array to emoji objects
- * @param arr emoji array
- * @returns emojiMeter
+ * Convert emoji array to emoji meter object
+ * @param  {Array<string>} arr emoji Array
+ * @returns {emojiMeter} emoji Meter
  */
 export const emojiToMeter = (arr: Array<string>): emojiMeter => {
     const reshape: emojiMeter = {};
@@ -28,4 +33,4 @@ export const emojiToMeter = (arr: Array<string>): emojiMeter => {
     }
 
     return reshape;
-}
+};

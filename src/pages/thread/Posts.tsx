@@ -25,34 +25,34 @@ export const Posts = () => {
     const [getParameters, setGetParameters] = useState<postsGetParameters>({
         path: {
             // react-routerから取得したthreadIdを充てる
-            threadId: threadId ?? "0"
+            threadId: threadId ?? "0",
         },
         query: {
-            offset: "0"
+            offset: "0",
         },
-        body: {}
+        body: {},
     });
 
     const [postParameters, setPostParameters] = useState<postsPostParameters>({
         path: {
-            threadId: threadId ?? "0"
+            threadId: threadId ?? "0",
         },
-        query: {
-        },
+        query: {},
         body: {
-            post: ""
-        }
+            post: "",
+        },
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setNewPost(e.target.value);
-    }
+    };
 
     useEffect(() => {
         setPostParameters({
-            ...postParameters, body: {
-                post: newPost
-            }
+            ...postParameters,
+            body: {
+                post: newPost,
+            },
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [newPost]);
@@ -78,7 +78,7 @@ export const Posts = () => {
         }
         // newpostをリセット
         setNewPost("");
-    }
+    };
 
     /**
      * 本来はreduxのreducersで管理したいところ
@@ -92,22 +92,23 @@ export const Posts = () => {
             }
             return newOffset;
         });
-    }
+    };
 
     const handleNext = () => {
         setOffset((prev) => {
             const newOffset = prev + 1;
             return newOffset;
-        })
-    }
+        });
+    };
 
     // setTrueOffset from offset to setGetParameters
     useEffect(() => {
         const trueOffset = getTrueOffset(offset);
         setGetParameters({
-            ...getParameters, query: {
-                offset: trueOffset
-            }
+            ...getParameters,
+            query: {
+                offset: trueOffset,
+            },
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [offset]);
@@ -122,7 +123,7 @@ export const Posts = () => {
                 console.error(error);
                 throw error;
             }
-        }
+        };
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         exec();
         // eslint-disable-next-line
@@ -134,55 +135,67 @@ export const Posts = () => {
                 <div className="flex gap-4 flex-wrap md:flex-nowrap">
                     <div className="flex flex-col gap-4 w-full md:w-2/3">
                         <p className="p-4 text-2xl font-bold">{posts?.title}</p>
-                        {
-                            posts?.posts.map((v) => {
-                                return (
-                                    <PostCard key={v.id} id={v.id} post={v.post} />
-                                );
-                            })
-                        }
+                        {posts?.posts.map((v) => {
+                            return <PostCard key={v.id} id={v.id} post={v.post} />;
+                        })}
                         <div className="container mx-auto p-4">
                             <div className="flex flex-col gap-8 items-center justify-center">
                                 <div className="btn-group">
-                                    {
-                                        offset <= 1 ? (
-                                            <div className="btn btn-disabled" onClick={handlePrevious} onKeyDown={handlePrevious}>«</div>
-                                        ) : (
-                                            <div className="btn" onClick={handlePrevious} onKeyDown={handlePrevious}>«</div>
-                                        )
-                                    }
+                                    {offset <= 1 ? (
+                                        <div
+                                            className="btn btn-disabled"
+                                            onClick={handlePrevious}
+                                            onKeyDown={handlePrevious}
+                                        >
+                                            «
+                                        </div>
+                                    ) : (
+                                        <div className="btn" onClick={handlePrevious} onKeyDown={handlePrevious}>
+                                            «
+                                        </div>
+                                    )}
                                     <div className="btn">Page {offset}</div>
-                                    {
-                                        posts && posts.posts.length < 10 ? (
-                                            <div className="btn btn-disabled" onClick={handleNext} onKeyDown={handleNext}>»</div>
-                                        ) : (
-                                            <div className="btn" onClick={handleNext} onKeyDown={handleNext}>»</div>
-                                        )
-                                    }
+                                    {posts && posts.posts.length < 10 ? (
+                                        <div className="btn btn-disabled" onClick={handleNext} onKeyDown={handleNext}>
+                                            »
+                                        </div>
+                                    ) : (
+                                        <div className="btn" onClick={handleNext} onKeyDown={handleNext}>
+                                            »
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
-                    {
-                        errorsMessage.ErrorCode ?
-                            (
-                                <></>
-                            )
-                            : (
-                                <div className="flex flex-col gap-4 w-full md:w-1/3">
-                                    <p className="p-4 text-2xl font-bold">投稿する</p>
-                                    <textarea className="textarea textarea-bordered w-full h-48" placeholder="Write comment" value={newPost} onChange={handleChange} />
-                                    <div className="btn" onClick={() => {createNewPost()}} onKeyDown={() => {createNewPost()}}>投稿！</div>
-                                </div>
-                            )
-                    }
-
+                    {errorsMessage.ErrorCode ? (
+                        <></>
+                    ) : (
+                        <div className="flex flex-col gap-4 w-full md:w-1/3">
+                            <p className="p-4 text-2xl font-bold">投稿する</p>
+                            <textarea
+                                className="textarea textarea-bordered w-full h-48"
+                                placeholder="Write comment"
+                                value={newPost}
+                                onChange={handleChange}
+                            />
+                            <div
+                                className="btn"
+                                onClick={() => {
+                                    createNewPost();
+                                }}
+                                onKeyDown={() => {
+                                    createNewPost();
+                                }}
+                            >
+                                投稿！
+                            </div>
+                        </div>
+                    )}
                 </div>
-            </div >
-        </div >
+            </div>
+        </div>
     );
-}
+};
 
 export default Posts;

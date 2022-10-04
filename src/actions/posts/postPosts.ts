@@ -7,7 +7,7 @@ export const postPosts = async (parameters: postsPostParameters) => {
     try {
         // eslint-disable-next-line no-underscore-dangle
         const postsPostResponse = await apiClient.threads._threadId(path.threadId).posts.post({
-            body
+            body,
         });
         return postsPostResponse.body;
     } catch (error) {
@@ -19,4 +19,4 @@ export const postPosts = async (parameters: postsPostParameters) => {
         }
         throw error;
     }
-}
+};

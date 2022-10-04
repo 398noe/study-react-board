@@ -9,8 +9,8 @@ const slice = createSlice({
     reducers: {
         setPosts: (state, action: PayloadAction<posts>) => {
             return action.payload;
-        }
-    }
+        },
+    },
 });
 
 export default slice.reducer;

@@ -10,7 +10,9 @@ import threads from "./threads";
 // store
 export const store = configureStore({
     reducer: {
-        errors, threads, posts
+        errors,
+        threads,
+        posts,
     },
 });
 

@@ -13,18 +13,12 @@ export const Layout = () => {
         <>
             <Navbar />
             <main className="py-16">
-                {
-                    errorsMessage.ErrorCode ? (
-                        <Error />
-                    ) : (
-                        <></>
-                    )
-                }
+                {errorsMessage.ErrorCode ? <Error /> : <></>}
                 <Outlet />
             </main>
             <Footer />
         </>
     );
-}
+};
 
 export default Layout;

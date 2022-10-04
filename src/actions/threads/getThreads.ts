@@ -6,7 +6,7 @@ export const getThreads = async (parameters: threadsGetParameters) => {
     const { query } = parameters;
     try {
         const threadsGetResponse = await apiClient.threads.get({
-            query
+            query,
         });
         return threadsGetResponse.body;
     } catch (error) {
@@ -18,4 +18,4 @@ export const getThreads = async (parameters: threadsGetParameters) => {
         }
         throw error;
     }
-}
+};

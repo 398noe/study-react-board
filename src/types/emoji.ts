@@ -1,3 +1,3 @@
 export interface emojiMeter {
-    [name: string] : number
+    [name: string]: number;
 }
