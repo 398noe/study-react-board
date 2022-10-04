@@ -4,11 +4,9 @@ import { postThreads } from "../actions/threads/postThreads";
 import { threadsPostParameters } from "../types/threads";
 
 export const New = () => {
-    const [threadName, setThreadName] = useState<string>("");
-
-    // for redirect
     const navigate = useNavigate();
 
+    const [threadName, setThreadName] = useState<string>("");
     const [postParameters, setPostParameters] = useState<threadsPostParameters>({
         path: {},
         query: {},

@@ -21,7 +21,7 @@ export const Threads = () => {
 
     const handlePrevious = () => {
         setOffset((prev) => {
-            const newOffset = offset - 1;
+            const newOffset = prev - 1;
             if (newOffset < 1) {
                 return 1;
             }
@@ -31,7 +31,7 @@ export const Threads = () => {
 
     const handleNext = () => {
         setOffset((prev) => {
-            const newOffset = offset + 1;
+            const newOffset = prev + 1;
             return newOffset;
         });
     };

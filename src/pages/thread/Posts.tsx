@@ -12,15 +12,13 @@ import { postPosts } from "../../actions/posts/postPosts";
  * 掲示板スレッド内を表示するアプリ
  */
 export const Posts = () => {
-    const errorsMessage = useSelector(errors);
-    // 投稿記事
-    const [posts, setPosts] = useState<postsGetResponse200>();
-    const [offset, setOffset] = useState<number>(1);
-
-    // 新規投稿する文章
-    const [newPost, setNewPost] = useState<string>("");
 
     const { threadId } = useParams();
+    const errorsMessage = useSelector(errors);
+    const [posts, setPosts] = useState<postsGetResponse200>();
+
+    const [offset, setOffset] = useState<number>(1);
+    const [newPost, setNewPost] = useState<string>("");
 
     const [getParameters, setGetParameters] = useState<postsGetParameters>({
         path: {
@@ -47,15 +45,26 @@ export const Posts = () => {
         setNewPost(e.target.value);
     };
 
-    useEffect(() => {
-        setPostParameters({
-            ...postParameters,
-            body: {
-                post: newPost,
-            },
+    /**
+     * 本来はreduxのreducersで管理したいところ
+     * postsのoffsetとthreadsのoffsetを混ぜてはいけないと思ったので、あえてreduxのstoreを使わないでおきました
+     */
+     const handlePrevious = () => {
+        setOffset((prev) => {
+            const newOffset = prev - 1;
+            if (newOffset < 1) {
+                return 1;
+            }
+            return newOffset;
         });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [newPost]);
+    };
+
+    const handleNext = () => {
+        setOffset((prev) => {
+            const newOffset = prev + 1;
+            return newOffset;
+        });
+    };
 
     const createNewPost = async () => {
         // postする
@@ -80,27 +89,6 @@ export const Posts = () => {
         setNewPost("");
     };
 
-    /**
-     * 本来はreduxのreducersで管理したいところ
-     * postsのoffsetとthreadsのoffsetを混ぜてはいけないと思ったので、あえてreduxのstoreを使わないでおきました
-     */
-    const handlePrevious = () => {
-        setOffset((prev) => {
-            const newOffset = prev - 1;
-            if (newOffset < 1) {
-                return 1;
-            }
-            return newOffset;
-        });
-    };
-
-    const handleNext = () => {
-        setOffset((prev) => {
-            const newOffset = prev + 1;
-            return newOffset;
-        });
-    };
-
     // setTrueOffset from offset to setGetParameters
     useEffect(() => {
         const trueOffset = getTrueOffset(offset);
@@ -112,6 +100,16 @@ export const Posts = () => {
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [offset]);
+
+    useEffect(() => {
+        setPostParameters({
+            ...postParameters,
+            body: {
+                post: newPost,
+            },
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [newPost]);
 
     useEffect(() => {
         const exec = async () => {
