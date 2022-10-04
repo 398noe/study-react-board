@@ -1,3 +1,8 @@
+/**
+ * @file errorResponse.ts
+ * @author 398noe
+ * @description errorResponse data for return true errorResponse to error state
+ */
 import { response400, response404, response500 } from "../types/util";
 
 export const response400Data: response400 = {
