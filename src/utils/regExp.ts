@@ -3,6 +3,7 @@
  * @author 398noe
  * @description regExps for board application
  */
+
 // eslint-disable-next-line
 export const urlRegExp = new RegExp(/(https?:\/\/[\S]+)/gim);
 
