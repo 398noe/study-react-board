@@ -34,6 +34,7 @@ module.exports = {
       "always"
     ],
     "no-console": "off",
+    "no-empty" : "off",
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/no-floating-promises": "off",
