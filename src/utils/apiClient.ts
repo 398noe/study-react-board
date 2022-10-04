@@ -1,3 +1,8 @@
+/**
+ * @file apiClient.ts
+ * @author 398noe
+ * @description HTTP Client with aspida and axios
+ */
 import axios, { AxiosError } from "axios";
 import aspida from "@aspida/axios";
 import api from "../api/$api";
@@ -5,12 +10,18 @@ import { store } from "../store/store";
 import { setErrors } from "../store/errors";
 import { response400Data, response404Data, response500Data } from "./errorRespnose";
 
+/**
+ * Define apiClient
+ */
 export const apiClient = api(
     aspida(axios, {
         baseURL: process.env.REACT_APP_BASE_URL,
     })
 );
 
+/**
+ * Make error handling of axios
+ */
 axios.interceptors.response.use(
     (response) => {
         return response;
@@ -20,16 +31,12 @@ axios.interceptors.response.use(
             if (error.response) {
                 switch (error.response.status) {
                     case 400:
-                        // Validation Error
-                        // response400 | response404 | response500型のデータを渡してあげる
                         store.dispatch(setErrors(response400Data));
                         break;
                     case 404:
-                        // Not Exist
                         store.dispatch(setErrors(response404Data));
                         break;
                     case 500:
-                        // Internal Server Error
                         store.dispatch(setErrors(response500Data));
                         break;
                     default:
@@ -37,7 +44,6 @@ axios.interceptors.response.use(
                         break;
                 }
             }
-            // When it's axios error
         }
         return Promise.reject(error);
     }
